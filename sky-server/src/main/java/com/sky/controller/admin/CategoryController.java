@@ -28,8 +28,8 @@ public class CategoryController {
      * @return
      */
     @PostMapping
-    public Result save (@RequestBody CategoryDTO categoryDTO) {
-        log.info("新增分类:{}", categoryDTO);
+    public Result<String> save(@RequestBody CategoryDTO categoryDTO){
+        log.info("新增分类：{}", categoryDTO);
         categoryService.save(categoryDTO);
         return Result.success();
     }
@@ -59,5 +59,16 @@ public class CategoryController {
         return Result.success();
     }
 
+    /**
+     * 修改分类
+     * @param categoryDTO
+     * @return
+     */
+    @PutMapping
+    public Result update (@RequestBody CategoryDTO categoryDTO) {
+        log.info("修改分类:{}", categoryDTO);
+        categoryService.update(categoryDTO);
+        return Result.success();
+    }
 
 }

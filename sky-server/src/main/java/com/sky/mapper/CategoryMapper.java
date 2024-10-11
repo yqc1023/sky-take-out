@@ -13,9 +13,9 @@ public interface CategoryMapper {
      * 新增分类
      * @param category
      */
-    @Insert("insert into category ( type, name, sort,  create_time, update_time, create_user, update_user,status) " +
-            "VALUES" +
-            " (#{type},#{name},#{sort},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})")
+    @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
+            " VALUES" +
+            " (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
     void Insert(Category category);
 
     /**
@@ -28,6 +28,7 @@ public interface CategoryMapper {
 
     /**
      * 启用和禁用分类
+     * 编辑分类
      * @param category
      */
 
