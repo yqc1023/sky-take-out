@@ -109,13 +109,35 @@ public class EmployeeController {
      */
     @PostMapping("/status/{status}")
     //status是路径参数,得用@PathVariable获取
-    //id是地址栏参数(Query),可以直接接收(像GetMapping类型)
+    //id是地址栏参数(Query),可以直接接收
     public Result  startOrStop (@PathVariable Integer status ,Long id )   {
         log.info("启用禁用员工账号:{},{}",status,id);
         employeeService.startOrStop(status,id);
         return Result.success();
     }
 
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("编辑员工信息:{}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<Employee> getById(@PathVariable Integer id) {
+        log.info("根据id查询员工:{}",id);
 
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
 }
