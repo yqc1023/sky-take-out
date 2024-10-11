@@ -135,7 +135,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee  employee = Employee.builder()//创建构建器来创建对象并赋值,更高级点,
                                 .status(status)// 但被创建的对象的类要有@Builder注解
                                 .id(id).build();
-        employeeMapper.startOrStop(employee);
+        employeeMapper.update(employee);
     }
 
 
@@ -152,6 +152,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
+
+    /**
+     * 根据id查找员工
+     * @param id
+     * @return
+     */
     @Override
     public Employee getById(Long id) {
         Employee employee = employeeMapper.getById(id);

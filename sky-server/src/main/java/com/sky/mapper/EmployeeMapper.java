@@ -38,17 +38,17 @@ public interface EmployeeMapper {
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
+     * 编辑员工信息
      * 启用禁用员工账号
      * @param employee
      */
-    void startOrStop(Employee employee);
-
-
-    /**
-     * x编辑员工信息
-     * @param employee
-     */
+    //此处因为两个功能都是对员工的修改操作(update)
+    //所以复用xml文件,具体可看其xml文件中的sql代码
     void update(Employee employee);
+
+
+
+
 
     /**
      * 根据id查询员工
