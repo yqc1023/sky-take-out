@@ -32,6 +32,8 @@ public class Employee implements Serializable {
 
     private Integer status;
 
+
+    //通过此注解可以对日期进行格式化,让数据以我们定义的格式传回前端并展示
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
