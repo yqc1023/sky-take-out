@@ -9,12 +9,11 @@ import com.sky.service.CategoryService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * 菜品分类管理
+ */
 
 @Slf4j
 @RestController
@@ -48,7 +47,17 @@ public class CategoryController {
         return Result.success(pageResult);
     }
 
-
+    /**
+     * 启用和禁用分类
+     * @param status
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status , Long id){
+        log.info("启用和禁用分类status和id:{},{}",status,id);
+        categoryService.startOrStop(status,id);
+        return Result.success();
+    }
 
 
 }

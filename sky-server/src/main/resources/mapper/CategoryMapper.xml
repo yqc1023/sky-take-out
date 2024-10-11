@@ -4,6 +4,7 @@
 <mapper namespace="com.sky.mapper.CategoryMapper">
 
 
+
     <select id="pageQuery" resultType="com.sky.entity.Category">
         select * from category
         <where>
@@ -16,4 +17,17 @@
         </where>
 
     </select>
+
+    <update id="update" parameterType="Category" >
+        update category
+        <set>
+            <if test="name != null and name !='' ">name = #{name},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="updateTime != null ">update_Time = #{updateTime},</if>
+            <if test="updateUser != null ">update_User = #{updateUser},</if>
+            <if test="status != null ">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

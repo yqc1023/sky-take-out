@@ -19,4 +19,11 @@ public interface CategoryService {
      * @return
      */
     PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    /**
+     * 启用和禁用分类
+     * @param status
+     */
+    void startOrStop(Integer status,Long id);
+
 }
