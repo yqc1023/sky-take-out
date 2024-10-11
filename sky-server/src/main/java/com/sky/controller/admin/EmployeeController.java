@@ -88,17 +88,34 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * 分页查询员工
+     @param employeePageQueryDTO
+      * @return
+     */
     @GetMapping("/page")
     public Result<PageResult> page (EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("员工分页查询:{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
 
-
-
-
-
-
     }
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    //status是路径参数,得用@PathVariable获取
+    //id是地址栏参数(Query),可以直接接收(像GetMapping类型)
+    public Result  startOrStop (@PathVariable Integer status ,Long id )   {
+        log.info("启用禁用员工账号:{},{}",status,id);
+        employeeService.startOrStop(status,id);
+        return Result.success();
+    }
+
+
 
 }

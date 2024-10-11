@@ -78,6 +78,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    /**
+     * 新增员工
+     * @param employeeDTO
+     */
     @Override
     public void save(EmployeeDTO employeeDTO) {
 
@@ -113,11 +117,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    /**
+     * 分页查询员工
+     * @param employeePageQueryDTO
+     * @return
+     */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
         Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         return new PageResult(page.getTotal(),page.getResult());
 
+    }
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Employee  employee = Employee.builder()//创建构建器来创建对象并赋值,更高级点,
+                                .status(status)// 但被创建的对象的类要有@Builder注解
+                                .id(id).build();
+        employeeMapper.startOrStop(employee);
     }
 }
