@@ -48,10 +48,8 @@ public class CategoryServiceImpl implements CategoryService {
         category.setStatus(StatusConstant.DISABLE);
 
         //设置创建时间、修改时间、创建人、修改人
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
-        category.setCreateUser(BaseContext.getCurrentId());
-        category.setUpdateUser(BaseContext.getCurrentId());
+
+        // 这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
 
         categoryMapper.insert(category);
     }
@@ -100,8 +98,8 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(categoryDTO,category);
 
         //设置修改时间、修改人
-        category.setUpdateTime(LocalDateTime.now());
-        category.setUpdateUser(BaseContext.getCurrentId());
+        //这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
+
 
         categoryMapper.update(category);
     }
@@ -115,9 +113,9 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
                 .build();
+        //设置创建/修改时间和创建/修改人
+        // 这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
         categoryMapper.update(category);
     }
 

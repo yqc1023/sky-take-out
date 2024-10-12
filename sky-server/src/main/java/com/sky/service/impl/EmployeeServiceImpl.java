@@ -87,8 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
         //设置创建时间和修改时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        // 这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
 
         //设置账号状态
         employee.setStatus(StatusConstant.ENABLE);
@@ -104,8 +103,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //通过ThreadLocal这个线程的存储空间来储存数据,并使用get(),remove()方法获取和删除数据
         //为了方便使用,直接将ThreadLocal的相关方法和创建其对象的代码封装入BaseContext类中
-        employee.setUpdateUser(BaseContext.getCurrentId());
-        employee.setCreateUser(BaseContext.getCurrentId());
+
+//        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateUser(BaseContext.getCurrentId());
+
+        //设置创建/修改时间和创建/修改人
+        // 这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
 
 
         employeeMapper.insert(employee);
@@ -134,7 +137,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void startOrStop(Integer status, Long id) {
         Employee  employee = Employee.builder()//创建构建器来创建对象并赋值,更高级点,
                                 .status(status)// 但被创建的对象的类要有@Builder注解
-                                .id(id).build();
+                                .id(id).build();//设置创建/修改时间和创建/修改人
+                                                 // 这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
         employeeMapper.update(employee);
     }
 
@@ -147,8 +151,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO,employee);
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
+        //设置创建/修改时间和创建/修改人
+        // 这一步在AOP中操作了(见com.sky.aspect.AutoFillAspect)
         employeeMapper.update(employee);
     }
 
