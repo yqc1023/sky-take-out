@@ -3,19 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.CategoryMapper">
 
-
-
     <select id="pageQuery" resultType="com.sky.entity.Category">
         select * from category
         <where>
             <if test="name != null and name != ''">
-               name like concat('%',#{name},'%')
+                and name like concat('%',#{name},'%')
             </if>
-            <if test="type != null and type != ''">
+            <if test="type != null">
                 and type = #{type}
             </if>
         </where>
-
+        order by sort asc , create_time desc
     </select>
 
     <update id="update" parameterType="Category">
@@ -42,4 +40,13 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="list" resultType="Category">
+        select * from category
+        where status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort asc,create_time desc
+    </select>
 </mapper>
