@@ -18,7 +18,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/category")
-@Api(tags = "分类相关接口")
 @Slf4j
 public class CategoryController {
 
@@ -31,7 +30,6 @@ public class CategoryController {
      * @return
      */
     @PostMapping
-    @ApiOperation("新增分类")
     public Result<String> save(@RequestBody CategoryDTO categoryDTO){
         log.info("新增分类：{}", categoryDTO);
         categoryService.save(categoryDTO);
@@ -44,7 +42,6 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/page")
-    @ApiOperation("分类分页查询")
     public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
         log.info("分页查询：{}", categoryPageQueryDTO);
         PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
@@ -57,7 +54,6 @@ public class CategoryController {
      * @return
      */
     @DeleteMapping
-    @ApiOperation("删除分类")
     public Result<String> deleteById(Long id){
         log.info("删除分类：{}", id);
         categoryService.deleteById(id);
@@ -70,7 +66,6 @@ public class CategoryController {
      * @return
      */
     @PutMapping
-    @ApiOperation("修改分类")
     public Result<String> update(@RequestBody CategoryDTO categoryDTO){
         categoryService.update(categoryDTO);
         return Result.success();
@@ -83,7 +78,6 @@ public class CategoryController {
      * @return
      */
     @PostMapping("/status/{status}")
-    @ApiOperation("启用禁用分类")
     public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
         categoryService.startOrStop(status,id);
         return Result.success();
@@ -95,7 +89,6 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/list")
-    @ApiOperation("根据类型查询分类")
     public Result<List<Category>> list(Integer type){
         List<Category> list = categoryService.list(type);
         return Result.success(list);
