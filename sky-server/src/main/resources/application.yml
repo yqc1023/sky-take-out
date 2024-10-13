@@ -1,6 +1,9 @@
 server:
   port: 8888
 
+
+
+
 spring:
   profiles:
     active: dev
@@ -12,6 +15,11 @@ spring:
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
+
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 10MB
 
 mybatis:
   #mapper配置文件
@@ -29,6 +37,7 @@ logging:
         service: info
         controller: info
 
+#Jwt令牌
 sky:
   jwt:
     # 设置jwt签名加密时使用的秘钥
@@ -37,3 +46,8 @@ sky:
     admin-ttl: 720000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+
+#阿里云 (调用dev.yml中的值)
+  alioss:
+    bucket-name: ${sky.alioss.bucket-name}
+    endpoint: ${sky.alioss.endpoint}}

@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 /**
  * 自定义注解,用于标识某个方法需要进行功能字段填充处理
  */
-@Retention(RetentionPolicy.RUNTIME)//表示此注解在运行时生效
+@Retention(RetentionPolicy.RUNTIME)//表示此注解在任意时段都生效
 @Target(ElementType.METHOD)//表示此注解在方法上生效(加在什么位置)
 public @interface AutoFill {
     //数据库操作类型: UPDATE INSERT

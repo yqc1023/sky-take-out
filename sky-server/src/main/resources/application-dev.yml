@@ -1,4 +1,5 @@
 sky:
+  #数据库
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     host: localhost
@@ -6,3 +7,10 @@ sky:
     database: sky_take_out
     username: root
     password: 123456
+
+  #阿里云
+  alioss:
+    bucket-name: cangqiongwaimai-yqc
+    endpoint: https://oss-cn-hangzhou.aliyuncs.com
+
+
