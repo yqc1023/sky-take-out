@@ -21,15 +21,11 @@ import java.io.ByteArrayInputStream;
 @AllArgsConstructor
 @Slf4j
 public class AliOssUtil {
-
-
     private String endpoint;
-
     private String bucketName;
 
     /**
      * 文件上传
-     *
      * @param bytes
      * @param objectName
      * @return

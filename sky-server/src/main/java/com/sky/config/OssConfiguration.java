@@ -3,6 +3,7 @@ package com.sky.config;
 import com.sky.properties.AliOssProperties;
 import com.sky.utils.AliOssUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-
 public class OssConfiguration {
-
-    @Bean//使用@Bean注解可以调用此方法,而如果在类上加@Component则可以调用整个类,
-    // 没必要,我们只需aliOssUtil方法,所以用@Bean
+    @Autowired
+    //第三方bean,需要的时候使用@Autowired注入进来
+    @Bean//使用@Bean注解可以将此方法执行的返回值对象(new AliOssUtil())交给IOC容器管理，成为IOC容器当中的bean对象(省去创建对象)
     @ConditionalOnMissingBean//当没有这个bean时再创建 增加复用
     public AliOssUtil aliOssUtil(AliOssProperties aliOssProperties){
         log.info("开始创建阿里云文件上传工具类对象:{}",aliOssProperties);

@@ -24,9 +24,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/admin/common")
 public class CommonController {
-    @Autowired
-    private AliOssUtil aliOssUtil;
-
 
 
     /**
@@ -34,6 +31,8 @@ public class CommonController {
      * @param file
      * @return
      */
+    @Autowired
+    private AliOssUtil  aliOssUtil;
     @PostMapping("//upload")
     public Result<String> upload(MultipartFile file)  {
             log.info("文件上传:{}",file);
@@ -42,8 +41,7 @@ public class CommonController {
             String originalFilename = file.getOriginalFilename();
 
             //截取原始文件名的后缀
-            //lastindexof("."),返回最后一个字符串"."的索引，
-            //substring(索引),从索引位置截取到最后(包左不包右)
+            //lastindexof("."),返回最后一个字符串"."的索引。substring(索引),从索引位置截取到最后(包左不包右)
             //所以得出来的结果是".xxx"的形式
             String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
 
@@ -61,14 +59,11 @@ public class CommonController {
             return Result.success(filePath);
             //上传文件给阿里云oss后,阿里云会返回一个可以访问到此文件的url地址filePath
             //再把这个地址记录进数据库
-
-
-
         } catch (IOException | ClientException e) {
             //如果上传出bug
             //抛出定义好的错误信息(见com.sky.constant.MessageConstant)
             log.info("文件上传失败");
-             throw new RuntimeException(MessageConstant.UPLOAD_FAILED);
+            return Result.error(MessageConstant.UPLOAD_FAILED);
         }
     }
 
