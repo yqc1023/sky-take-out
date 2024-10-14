@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.management.ObjectName;
 import java.io.ByteArrayInputStream;
 
 
@@ -60,16 +61,11 @@ public class AliOssUtil {
         }
 
         //文件访问路径规则 https://BucketName.Endpoint/ObjectName
-        StringBuilder stringBuilder = new StringBuilder("https://");
-        stringBuilder
-                .append(bucketName)
-                .append(".")
-                .append(endpoint)
-                .append("/")
-                .append(objectName);
+        String url = endpoint.split("//")[0] + "//" + bucketName + "." +
+                endpoint.split("//")[1] + "/" + objectName;
 
-        log.info("文件上传到:{}", stringBuilder.toString());
+        log.info("文件上传到:{}", url);
 
-        return stringBuilder.toString();
+        return url;
     }
 }
