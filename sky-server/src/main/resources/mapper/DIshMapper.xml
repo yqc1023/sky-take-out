@@ -8,10 +8,14 @@
         VALUES
             (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},status)
     </insert>
+
     <delete id="delete">
-        delete from dish as d
+        delete from dish
         <where>
-            d.id = #{id}
+            id in
+            <foreach collection="ids" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
         </where>
     </delete>
 
@@ -33,10 +37,7 @@
     </select>
 
     <select id="selectById" resultType="java.lang.Integer">
-        select * from dish
-        <where>
-            id = #{id}
-        </where>
+        select status from  dish where  id = #{id}
     </select>
 
 

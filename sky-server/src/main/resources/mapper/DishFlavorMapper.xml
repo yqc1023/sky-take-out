@@ -13,11 +13,14 @@
             </foreach>
     </insert>
 
-        <delete id="delete">
-        delete from dish_flavor
-        <where>
-            id = #{id}
-        </where>
+    <delete id="delete">
+        delete from dish_flavor 
+            <where>
+                dish_id in
+                <foreach collection="dishIds" item="id" separator="," open="(" close=")">
+                    #{id}
+                </foreach>
+            </where>
     </delete>
 
 

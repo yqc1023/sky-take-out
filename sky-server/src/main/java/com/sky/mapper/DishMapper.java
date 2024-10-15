@@ -6,7 +6,6 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
-import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -42,15 +41,15 @@ public interface DishMapper {
 
     /**
      * 批量删除菜品
-     * @param id
+     * @param ids
      */
-    void delete(Integer id);
+    void delete(List<Long> ids);
 
     /**
-     * 根据id查询菜品
+     * 根据主键id查询菜品
      *
-     * @param ids
+     * @param id
      * @return
      */
-    Integer selectById(Integer id);
+    Integer selectById(Long id);
 }

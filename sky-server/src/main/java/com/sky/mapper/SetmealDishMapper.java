@@ -1,11 +1,7 @@
 package com.sky.mapper;
 
 
-import com.sky.service.DishService;
-import com.sky.service.impl.DishServiceimpl;
-import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -13,9 +9,12 @@ import java.util.List;
 public interface SetmealDishMapper {
 
 
+
     /**
-     * 批量删除菜品
-     * @param id
+     * 根据菜品id查询套餐id
+     *
+     * @param dishIds
+     * @return
      */
-    void delete(Integer id);
+    List<Long> getSetmealIdsByDishIds(List<Long> dishIds);
 }

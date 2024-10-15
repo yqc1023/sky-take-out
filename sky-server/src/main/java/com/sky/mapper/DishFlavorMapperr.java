@@ -2,7 +2,6 @@ package com.sky.mapper;
 
 
 import com.sky.entity.DishFlavor;
-import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public interface DishFlavorMapperr {
 
     /**
      * 批量删除口味
-     * @param id
+     * @param dishIds
      */
-    void delete(Integer id);
+    void delete(List<Long> dishIds);
 }
