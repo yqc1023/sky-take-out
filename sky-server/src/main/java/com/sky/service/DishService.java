@@ -7,6 +7,8 @@ import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 public interface DishService {
 
@@ -24,4 +26,14 @@ public interface DishService {
      * @return
      */
     PageResult pageQuary(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 菜品的批量删除
+     * @param ids
+     */
+    void delete(List<Integer> ids);
+
+
+
+
 }

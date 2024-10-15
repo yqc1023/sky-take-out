@@ -8,6 +8,7 @@ import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
 import com.sky.mapper.DishFlavorMapperr;
 import com.sky.mapper.DishMapper;
+import com.sky.mapper.SetmealDishMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.utils.AliOssUtil;
@@ -31,6 +32,8 @@ public class DishServiceimpl implements DishService {
     @Autowired
     private DishFlavorMapperr dishFlavorMapperr;
 
+    @Autowired
+    private SetmealDishMapper setmealDishMapperr;
     /**
      * 新增菜品
      * @param dishDTO
@@ -64,10 +67,42 @@ public class DishServiceimpl implements DishService {
 
     }
 
+    /**
+     * 菜品分页查询
+     * @param dishPageQueryDTO
+     * @return
+     */
     @Override
     public PageResult pageQuary(DishPageQueryDTO dishPageQueryDTO) {
         PageHelper.startPage(dishPageQueryDTO.getPage(),dishPageQueryDTO.getPageSize());
         Page<DishVO> dishVOS=dishMapper.pageQuary(dishPageQueryDTO);
         return new PageResult(dishVOS.getTotal(),dishVOS.getResult());
+    }
+
+
+    /**
+     * 批量删除口味
+     * @param ids
+     */
+    @Transactional
+    @Override
+    public void delete(List<Integer> ids) {//不对
+                                            //status为0不能删
+        for (Integer id : ids) {
+            Integer status= dishMapper.selectById(id);
+            if (status == 1){
+                dishMapper.delete(id);
+                dishFlavorMapperr.delete(id);
+                setmealDishMapperr.delete(id);
+            }
+        }
+
+
+        if (!dishs.isEmpty() ) {
+            dishMapper.delete(ids);
+            dishFlavorMapperr.delete(ids);
+            setmealDishMapperr.delete(ids);
+        }
+
     }
 }

@@ -12,4 +12,13 @@
                 (#{df.dishId},#{df.name},#{df.value})
             </foreach>
     </insert>
+
+        <delete id="delete">
+        delete from dish_flavor
+        <where>
+            id = #{id}
+        </where>
+    </delete>
+
+
 </mapper>

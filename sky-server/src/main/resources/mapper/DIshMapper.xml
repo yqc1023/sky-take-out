@@ -8,6 +8,12 @@
         VALUES
             (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},status)
     </insert>
+    <delete id="delete">
+        delete from dish as d
+        <where>
+            d.id = #{id}
+        </where>
+    </delete>
 
 
     <select id="pageQuary" resultType="com.sky.vo.DishVO">
@@ -25,4 +31,13 @@
         </where>
         order by d.create_time desc
     </select>
+
+    <select id="selectById" resultType="java.lang.Integer">
+        select * from dish
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+
 </mapper>
