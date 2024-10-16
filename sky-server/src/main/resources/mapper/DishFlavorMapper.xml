@@ -13,7 +13,16 @@
             </foreach>
     </insert>
 
-    <delete id="delete">
+    <update id="updateWithFlavor">
+        update dish_flavor
+        <set>
+            <if test="name != null">name = #{name}</if>
+            <if test="value != null">value = #{value}</if>
+        </set>
+        where dish_id = #{dishId}
+    </update>
+
+    <delete id="deleteByIds">
         delete from dish_flavor 
             <where>
                 dish_id in
