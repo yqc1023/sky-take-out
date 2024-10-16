@@ -74,10 +74,29 @@ public class DishController {
         return Result.success(dishVO);
     }
 
+
+    /**
+     * 修改菜品
+     * @param dishDTO
+     * @return
+     */
     @PutMapping
     public Result update(@RequestBody DishDTO dishDTO){
         log.info("修改菜品:{},{}",dishDTO,dishDTO.getId());
         dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
+
+    /**
+     * 修改菜品状态
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result updateStatus(@PathVariable Integer status , Long id){
+        log.info("修改菜品状态:{},{}",status,id);
+        dishService.updateStatus(status,id);
         return Result.success();
     }
 }
