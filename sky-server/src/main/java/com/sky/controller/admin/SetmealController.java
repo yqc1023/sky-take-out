@@ -60,7 +60,6 @@ public class SetmealController {
     @PostMapping
     public Result save(@RequestBody SetmealDTO setmealDTO) {
         log.info("新增套餐:{}",setmealDTO);
-        //将套餐信息插入
         setmealService.insert(setmealDTO);
         return Result.success();
     }
