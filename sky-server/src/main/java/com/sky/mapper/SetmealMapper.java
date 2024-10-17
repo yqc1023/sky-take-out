@@ -12,6 +12,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Mapper
 public interface SetmealMapper {
 
@@ -53,4 +55,24 @@ public interface SetmealMapper {
      */
     @Update("update setmeal set status = #{status} where id = #{id}")
     void updateStatus(Integer status, Integer id);
+
+    /**
+     * 根据ids批量查询套餐信息
+     * @param ids
+     * @return
+     */
+    List<Setmeal> getByIds(List<Integer> ids);
+
+    /**
+     * 根据ids批量删除套餐
+     * @param ids
+     */
+    void delete(List<Integer> ids);
+
+    /**
+     * 修改套餐
+     * @param setmealVO
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(SetmealVO setmealVO);
 }

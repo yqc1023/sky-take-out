@@ -10,6 +10,7 @@ import com.sky.result.Result;
 import com.sky.service.SetmealService;
 import com.sky.vo.SetmealVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,6 +75,30 @@ public class SetmealController {
     public Result updateStatus(@PathVariable Integer status,  Integer id) {
         log.info("设置套餐起售和停售:{}{}",status,id);
         setmealService.updateStatus(status,id);
+        return Result.success();
+    }
+
+    /**
+     *批量删除套餐
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids) {
+        log.info("批量删除套餐:{}",ids);
+        setmealService.delete(ids);
+        return Result.success();
+    }
+
+    /**
+     * 修改套餐
+     * @param setmealDTO
+     * @return
+     */
+    @PutMapping
+    public Result update(@RequestBody SetmealDTO setmealDTO) {
+        log.info("修改套餐:{}",setmealDTO);
+        setmealService.update(setmealDTO);
         return Result.success();
     }
 
