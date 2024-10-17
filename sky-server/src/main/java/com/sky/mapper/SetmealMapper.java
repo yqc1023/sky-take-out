@@ -9,6 +9,7 @@ import com.sky.vo.SetmealVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper
@@ -43,8 +44,13 @@ public interface SetmealMapper {
      * @param setmeal
      */
     @AutoFill(value = OperationType.INSERT)
-    @Insert("insert into setmeal (category_id, name, price, description, image, create_time, update_time, create_user, update_user)" +
-            "VALUES" +
-            "(#{categoryId},#{name},#{price},#{description},#{image},#{createTime},#{updateTime},#{createUser},#{updateUser})")
     void insert(Setmeal setmeal);
+
+    /**
+     * 根据id设置套餐的起售与停售
+     * @param status
+     * @param id
+     */
+    @Update("update setmeal set status = #{status} where id = #{id}")
+    void updateStatus(Integer status, Integer id);
 }

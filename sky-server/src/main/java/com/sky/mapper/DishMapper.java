@@ -5,6 +5,7 @@ import com.sky.annotation.AutoFill;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
+import com.sky.entity.SetmealDish;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -63,7 +64,7 @@ public interface DishMapper {
      * @return
      */
     @Select("select * from dish_flavor where dish_id = #{dishId}")
-    List<DishFlavor> getByDishId(Long dishId);
+    List<DishFlavor> getDishFlavorByDishId(Long dishId);
 
     /**
      * 修改菜品及口味
@@ -71,4 +72,20 @@ public interface DishMapper {
      */
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
+    /**
+     * 根据分类id查询菜品
+     *
+     * @param categoryId
+     * @return
+     */
+    @Select("select * from dish where category_id = #{categoryId}")
+    List<Dish> getByCategoryId(Long categoryId);
+
+    /**
+     * 根据dishId查询菜品信息
+     * @param dishIds
+     * @return
+     */
+    List<Dish> getByDishIds(List<Long> dishIds);
 }

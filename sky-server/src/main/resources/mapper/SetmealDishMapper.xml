@@ -4,6 +4,15 @@
 <mapper namespace="com.sky.mapper.SetmealDishMapper">
 
 
+    <insert id="insert">
+        insert into setmeal_dish (setmeal_id, dish_id, name, price, copies)
+            VALUES  (#{setmealId},#{dishId},#{name},#{price},#{copies})
+    </insert>
+
+
+
+
+
 
     <select id="getSetmealIdsByDishIds" resultType="java.lang.Long">
         select setmeal_id  from setmeal_dish

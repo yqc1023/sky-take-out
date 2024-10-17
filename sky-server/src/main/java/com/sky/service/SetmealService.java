@@ -32,4 +32,10 @@ public interface SetmealService {
     void insert(SetmealDTO setmealDTO);
 
 
+    /**
+     * 设置套餐起售停售
+     * @param status
+     * @param id
+     */
+    void updateStatus(Integer status, Integer id);
 }

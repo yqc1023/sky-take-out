@@ -6,6 +6,7 @@ import com.sky.entity.SetmealDish;
 import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,13 +16,10 @@ public interface SetmealDishMapper {
 
     /**
      * 插入套餐中包含的菜品信息
-     * @param setmealDishes
+     * @param setmealDish
      */
-    @AutoFill(value = OperationType.INSERT)
-    @Insert("insert into setmeal_dish (setmeal_id, dish_id, name, price, copies) " +
-            "VALUES " +
-            "(#{setmealId},#{dishId},#{name},#{price},#{price})")
-     void insert(List<SetmealDish> setmealDishes);
+
+     void insert(SetmealDish setmealDish);
 
     /**
      * 根据菜品id查询套餐id
@@ -29,4 +27,12 @@ public interface SetmealDishMapper {
      * @return
      */
     List<Long> getSetmealIdsByDishIds(List<Long> dishIds);
+
+    /**
+     * 根据setmealId查询菜品信息
+     * @param setmealId
+     * @return
+     */
+    @Select("select * from  setmeal_dish where setmeal_id = #{setmealId}")
+    List<SetmealDish> getDishIdsBySetmealId(Integer setmealId);
 }

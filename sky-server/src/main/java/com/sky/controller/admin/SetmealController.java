@@ -29,13 +29,13 @@ public class SetmealController {
     private SetmealDishMapper setmealDishMapper;
 
     /**
-     * 套餐的分类查询
+     * 套餐的分页查询
      * @param setmealPageQueryDTO
      * @return
      */
     @GetMapping("/page")
     public Result<PageResult> page(SetmealPageQueryDTO setmealPageQueryDTO) {
-        log.info("套餐的分类管理:{}", setmealPageQueryDTO);
+        log.info("套餐的分页查询:{}", setmealPageQueryDTO);
         PageResult pageResult = setmealService.pageQuery(setmealPageQueryDTO);
         return Result.success(pageResult);
     }
@@ -61,6 +61,19 @@ public class SetmealController {
     public Result save(@RequestBody SetmealDTO setmealDTO) {
         log.info("新增套餐:{}",setmealDTO);
         setmealService.insert(setmealDTO);
+        return Result.success();
+    }
+
+    /**
+     * 设置套餐起售和停售
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result updateStatus(@PathVariable Integer status,  Integer id) {
+        log.info("设置套餐起售和停售:{}{}",status,id);
+        setmealService.updateStatus(status,id);
         return Result.success();
     }
 
