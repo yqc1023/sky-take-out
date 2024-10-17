@@ -6,9 +6,11 @@ import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
+import com.sky.entity.Category;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
 import com.sky.exception.DeletionNotAllowedException;
+import com.sky.mapper.CategoryMapper;
 import com.sky.mapper.DishFlavorMapperr;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
@@ -32,6 +34,9 @@ public class DishServiceimpl implements DishService {
 
     @Autowired
     private DishFlavorMapperr dishFlavorMapperr;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     @Autowired
     private SetmealDishMapper setmealDishMapperr;
