@@ -60,13 +60,8 @@ public class SetmealController {
     @PostMapping
     public Result save(@RequestBody SetmealDTO setmealDTO) {
         log.info("新增套餐:{}",setmealDTO);
-
         //将套餐信息插入
         setmealService.insert(setmealDTO);
-
-        //将套餐包含的菜品信息插入
-        List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
-        setmealDishMapper.insert(setmealDishes);
         return Result.success();
     }
 
