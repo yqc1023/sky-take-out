@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
  * 用户端设置营业状态
  */
 @Slf4j
-@RestController
+@RestController("userShopController")
 @RequestMapping("/user/shop")
 public class ShopController {
     //为了一个status的值开一张表不值得
     //所以用Redis完成存储和获取
+    public static final String KEY = "SHOP STATUS" ;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -28,7 +29,8 @@ public class ShopController {
      */
     @GetMapping("/status")
     public Result<Integer> getShopStatus(){
-        Integer status = (Integer) redisTemplate.opsForValue().get("SHOP STATUS");
+        Integer status = (Integer) redisTemplate.opsForValue().get(KEY
+        );
         log.info("获取营业状态{}",status == 1 ? "营业中" : "打样中");
         return Result.success(status);
     }
