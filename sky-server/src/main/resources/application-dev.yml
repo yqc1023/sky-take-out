@@ -13,4 +13,9 @@ sky:
     bucket-name: cangqiongwaimai-yqc
     endpoint: https://oss-cn-hangzhou.aliyuncs.com
 
-
+  #redis
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 10
