@@ -29,7 +29,7 @@ public class ShopController {
     @PutMapping("/{status}")
     public Result updateShopStatus(@PathVariable Integer status){
         log.info("设置营业状态:{}",status == 1 ? "营业中" : "打样中");
-        redisTemplate.opsForValue().set(KEY,status);
+        redisTemplate.opsForValue().set(KEY,status);//spring类型的set会覆盖相同key的数据
         return Result.success();
     }
 

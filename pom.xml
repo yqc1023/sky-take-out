@@ -111,6 +111,13 @@
                 <version>${jaxb-api}</version>
             </dependency>
 
+            <!--阿里云oss已经导入httpclient了-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.14</version>
+            </dependency>
+
             <!-- poi -->
             <dependency>
                 <groupId>org.apache.poi</groupId>

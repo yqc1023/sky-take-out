@@ -24,7 +24,7 @@ public class RedisConfiguration {
 
         //设置(String的)Key和value的序列化器,默认为dkSerializationRedisSerializer
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
+       //redisTemplate.setValueSerializer(new StringRedisSerializer());
 
         //设置(哈希的)value 和 key 的序列化器
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
