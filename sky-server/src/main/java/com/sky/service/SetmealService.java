@@ -22,12 +22,8 @@ public interface SetmealService {
      */
     PageResult pageQuery(SetmealPageQueryDTO setmealService);
 
-    /**
-     * 根据id查询套餐
-     * @param id
-     * @return
-     */
-    SetmealVO getById(Integer id);
+
+
 
     /**
      * 新增套餐
@@ -41,7 +37,7 @@ public interface SetmealService {
      * @param status
      * @param id
      */
-    void updateStatus(Integer status, Integer id);
+    void updateStatus(Integer status, Long id);
 
     /**
      * 批量删除套餐
@@ -68,4 +64,11 @@ public interface SetmealService {
      * @return
      */
     List<DishItemVO> getDishItemById(Long id);
+
+    /**
+     * 根据id查询套餐
+     * @param id
+     * @return
+     */
+    SetmealVO getById(Long id);
 }
