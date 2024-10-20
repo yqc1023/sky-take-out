@@ -50,7 +50,7 @@ public class SetmealController {
      * @return
      */
     @GetMapping("/{id}")
-    public Result<SetmealVO> getById(@PathVariable Integer id) {
+    public Result<SetmealVO> getById(@PathVariable Long id) {
         log.info("根据id查询套餐:{}",id);
         SetmealVO setmealVO = setmealService.getById(id);
         return Result.success(setmealVO);
@@ -77,7 +77,7 @@ public class SetmealController {
      */
     @PostMapping("/status/{status}")
     @CacheEvict(cacheNames = "setmealCache" , allEntries = true)
-    public Result updateStatus(@PathVariable Integer status,  Integer id) {
+    public Result updateStatus(@PathVariable Integer status,  Long id) {
         log.info("设置套餐起售和停售:{}{}",status,id);
         setmealService.updateStatus(status,id);
         return Result.success();
