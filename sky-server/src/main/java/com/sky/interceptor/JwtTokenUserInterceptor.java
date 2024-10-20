@@ -26,7 +26,6 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
     private JwtProperties jwtProperties;//配置类
     /**
      * 校验jwt
-     *
      * @param request
      * @param response
      * @param handler
