@@ -47,16 +47,8 @@ public class SetmealServiceImpl implements SetmealService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
-    /**
-     * 根据id查询套餐
-     * @param id
-     * @return
-     */
-    @Override
-    public SetmealVO getById(Integer id) {
-        SetmealVO setmealVO = setmealMapper.getById(id);
-        return setmealVO;
-    }
+
+
 
     /**
      * 新增套餐
@@ -86,7 +78,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param id
      */
     @Override
-    public void updateStatus(Integer status, Integer id) {
+    public void updateStatus(Integer status, Long id) {
         //获取套餐中包含的菜品信息
         List<SetmealDish> setmealDishes = setmealDishMapper.getDishIdsBySetmealId(id);
         List<Long> dishIds = new ArrayList<>();
@@ -162,5 +154,21 @@ public class SetmealServiceImpl implements SetmealService {
      */
     public List<DishItemVO> getDishItemById(Long id) {
         return setmealMapper.getDishItemBySetmealId(id);
+    }
+
+
+    /**
+     * 根据id查询套餐
+     * @param id
+     * @return
+     */
+    @Override
+    public SetmealVO getById(Long id) {
+        Setmeal setmeal = setmealMapper.getById(id);
+        SetmealVO setmealVO = new SetmealVO();
+        BeanUtils.copyProperties(setmeal, setmealVO);
+        List<SetmealDish> dishIdsBySetmeal = setmealDishMapper.getDishIdsBySetmealId(setmeal.getId());
+        setmealVO.setSetmealDishes(dishIdsBySetmeal);
+        return setmealVO;
     }
 }
