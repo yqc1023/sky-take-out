@@ -103,7 +103,6 @@ public class AddressBookController {
         if (list != null && list.size() == 1) {
             return Result.success(list.get(0));
         }
-
         return Result.error("没有查询到默认地址");
     }
 
