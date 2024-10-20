@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     private WeChatProperties weChatProperties;
 
     @Autowired
-    private JwtProperties jwtProperties;
+    private JwtProperties jwtProperties;//配置类(配置变量)
 
     @Autowired
     private UserMapper userMapper;
