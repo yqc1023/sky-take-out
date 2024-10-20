@@ -4,14 +4,14 @@ import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
+import com.sky.entity.ShoppingCart;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVO;
-import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public interface SetmealMapper {
      * @return
      */
     @Select("select * from setmeal where id = #{id}")
-    SetmealVO getById(Integer id);
+    Setmeal getById(Long id);
 
     /**
      * 新增套餐
@@ -55,7 +55,7 @@ public interface SetmealMapper {
      * @param id
      */
     @Update("update setmeal set status = #{status} where id = #{id}")
-    void updateStatus(Integer status, Integer id);
+    void updateStatus(Integer status, Long id);
 
     /**
      * 根据ids批量查询套餐信息
@@ -95,4 +95,16 @@ public interface SetmealMapper {
             "from setmeal_dish sd left join dish d on sd.dish_id = d.id " +
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
+
+
+    /**
+     * 查询购物车
+     * @param shoppingCart
+     * @return
+     */
+    @Select("select * from  shopping_cart where  user_id = #{userId}")
+    List<ShoppingCart> selectByUserId(ShoppingCart shoppingCart);
+
+
+
 }
