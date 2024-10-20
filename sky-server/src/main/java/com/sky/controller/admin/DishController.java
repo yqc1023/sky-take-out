@@ -120,14 +120,11 @@ public class DishController {
      * @param id
      * @return
      */
-    @CacheEvict
+    @CacheEvict(cacheNames = "userCache" , allEntries = true)
     @PostMapping("/status/{status}")
     public Result updateStatus(@PathVariable Integer status , Long id){
         log.info("修改菜品状态:{},{}",status,id);
         dishService.updateStatus(status,id);
-        //清理缓存数据
-        //需要删除多个缓存的情况则将其全部删除(先查出来再删除)
-        cleanCache("dish_*");
         return Result.success();
 
     }
