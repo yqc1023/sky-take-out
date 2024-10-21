@@ -2,10 +2,7 @@ package com.sky.mapper;
 
 import com.sky.dto.ShoppingCartDTO;
 import com.sky.entity.ShoppingCart;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -15,7 +12,7 @@ public interface ShoppingCartMapper {
 
 
     /**
-     * 根据套餐id额菜品id查询当前购物车中的数据
+     * 根据套餐id和菜品id查询当前购物车中的数据
      * @param shoppingCart
      */
     List<ShoppingCart> list (ShoppingCart shoppingCart);
@@ -24,7 +21,6 @@ public interface ShoppingCartMapper {
      *根据id修改商品数量
      * @param cart
      */
-    @Update("update shopping_cart set number = #{number} where id = #{id}")
     void updateNumberById(ShoppingCart cart);
 
     /**
@@ -50,4 +46,13 @@ public interface ShoppingCartMapper {
      */
     @Delete("delete from shopping_cart where user_id = #{userId}")
     void cleanAllByUserId(Long userId);
+
+
+    /**
+     * 根据userId查询购物车
+     * @param userId
+     * @return
+     */
+    @Select("select * from shopping_cart where user_id = #{userId}")
+    List<ShoppingCart> selectByUserId(Long userId);
 }
