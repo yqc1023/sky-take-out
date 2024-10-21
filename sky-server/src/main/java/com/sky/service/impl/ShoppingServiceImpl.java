@@ -1,10 +1,12 @@
 package com.sky.service.impl;
 
+import com.sky.constant.MessageConstant;
 import com.sky.context.BaseContext;
 import com.sky.dto.ShoppingCartDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.Setmeal;
 import com.sky.entity.ShoppingCart;
+import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
@@ -125,16 +127,15 @@ public class ShoppingServiceImpl implements ShoppingService {
         Long userId = BaseContext.getCurrentId();
         shoppingCart.setUserId(userId);
 
-        //查询用户购物车中的商品各自的数量
-        List<ShoppingCart> list = setmealMapper.selectByUserId(shoppingCart);
-        //遍历出所有种类的商品,判断数量是否大于1
-        for (ShoppingCart cart : list) {
-            if (cart.getNumber() > 1){//如果某一商品数量大于一,则将数量减一,存入数据库
-                cart.setNumber(cart.getNumber() - 1);
-                shoppingCartMapper.updateNumberById(cart);
-                continue;
-            }
-            shoppingCartMapper.delete(cart);//如果等于一,则将此商品删除
+        //查询用户购物车中被删除的商品的数量
+        ShoppingCart cart = setmealMapper.selectDishByUserId(shoppingCart);
+        //判断数量是否大于1
+        if (cart.getNumber() == 1) {
+            shoppingCartMapper.delete(shoppingCart);
+        }
+        else if (cart.getNumber() > 1) {
+            shoppingCart.setNumber(cart.getNumber() - 1);
+            shoppingCartMapper.updateNumberById(shoppingCart);
         }
     }
 }
