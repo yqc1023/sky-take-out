@@ -106,5 +106,9 @@ public interface SetmealMapper {
     List<ShoppingCart> selectByUserId(ShoppingCart shoppingCart);
 
 
-
+    /**
+     * 查询被删除的菜品信息
+     * @param shoppingCart
+     */
+    ShoppingCart selectDishByUserId(ShoppingCart shoppingCart);
 }
